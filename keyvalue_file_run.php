@@ -12,7 +12,7 @@ $file = new KeyValueFile('phplib/tmp');
 $file->set_keyvalue('あいう', array(1,2,3,4));
 
 
-var_dump($file->get_keyvalue('０１２'));
+var_dump($file->get_keyvalue('あいう'));
 
 
 
