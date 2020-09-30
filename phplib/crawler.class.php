@@ -1,5 +1,6 @@
 <?php
-namespace HB;
+namespace Crawler;
+
 class HB {
 		
 	var $desc_str = '';
@@ -11,8 +12,10 @@ class HB {
 		foreach ($arr['item'] as $item) {
 			$this->desc_str .= $item['description'];
 		}
-		
-		var_Dump($this->desc_str);
+	}
+	
+	function get_desc_str() {
+		return $this->desc_str;
 	}
 }
 

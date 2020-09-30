@@ -3,7 +3,6 @@
 require('phplib/keyvalue_file.class.php');
 
 use KeyValueFile\KeyValueFile;
-//use KeyValueFile;
 
 $file = new KeyValueFile('phplib/tmp');	
 $file->set_keyvalue('０１２', 'あマナ家人fがおがlがあgsぁsdさl');
