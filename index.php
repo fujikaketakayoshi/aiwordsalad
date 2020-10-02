@@ -37,12 +37,12 @@ foreach ( $tou_match_arr[1] as $m ) {
 	}
 }
 
-$file = new KeyValueFile('phplib/tmp');
+$file = new KeyValueFile('phplib/tmp', ['expires' => true]);
 $file->set_expire_span(60*60);
 $file->set_keyvalue('index_tou_array', $tou_array);
 
-$file = new KeyValueFile('phplib/tmp');
+$file = new KeyValueFile('phplib/tmp', ['expires' => true]);
 $file->set_expire_span(60*60);
 $file->set_keyvalue('index_ku_array', $ku_array);
 
-
+//var_dump($tou_array);
