@@ -12,7 +12,7 @@ $str = str_replace("。、", "。", $str);
 $str = str_replace("？", "。", $str);
 $str = str_replace("！", "。", $str);
 $str = str_replace("■", "。", $str);
-
+$str = str_replace("➡︎", "。", $str);
 
 preg_match_all("/([^、。].*?)、/u", $str, $tou_match_arr);
 
@@ -24,7 +24,8 @@ foreach ( $tou_match_arr[1] as $m ) {
 	if ( count($arr) == 1 ) {
 		$tou_array[] = $arr[0];
 	} else {
-		$ku_array[] = array_slice($arr, 0, count($arr) - 1);
+		$tmparr = array_slice($arr, 0, count($arr) - 1);
+		$ku_array[] = $tmparr[0];
 	}
 }
 

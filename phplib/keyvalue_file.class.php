@@ -133,8 +133,13 @@ class KeyValueFile {
 	}
 	
 	
-	function is_cache_available() {
-		$cache = $this->get_raw_cache();
+	function is_cache_available($key) {
+		$cache = [];
+		if ( $this->has_key($key) ) {
+			$cache = $this->get_raw_cache();
+		} else {
+			return false;
+		}
 		return time() > $cache['expires'] ? false : true;
 	}
 	
