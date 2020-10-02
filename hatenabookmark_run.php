@@ -5,14 +5,30 @@ use Crawler\HB;
 
 $hb = new HB();
 
+// 不適切記号を句読点化
 $str = str_replace("...", "、", $hb->get_desc_str());
 $str = str_replace("、。", "。", $str);
 $str = str_replace("。、", "。", $str);
+$str = str_replace("？", "。", $str);
+$str = str_replace("！", "。", $str);
+$str = str_replace("■", "。", $str);
 
-//var_dump($str);
 
-preg_match_all("/([^、。].*?)、/u", $str, $match_arr);
+preg_match_all("/([^、。].*?)、/u", $str, $tou_match_arr);
 
-var_dump($match_arr[1]);
-$tou_array;
-$ku_array;
+$tou_array = [];
+$ku_array = [];
+
+foreach ( $tou_match_arr[1] as $m ) {
+	$arr = explode("。", $m);
+	if ( count($arr) == 1 ) {
+		$tou_array[] = $arr[0];
+	} else {
+		$ku_array[] = array_slice($arr, 0, count($arr) - 1);
+	}
+}
+
+
+var_dump($ku_array);
+echo "<br>";
+var_dump($tou_array);
