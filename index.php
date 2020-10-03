@@ -23,6 +23,8 @@ $str = str_replace("？", "。", $str);
 $str = str_replace("！", "。", $str);
 $str = str_replace("■", "。", $str);
 $str = str_replace("➡︎", "。", $str);
+$str = str_replace("「", "", $str);
+$str = str_replace("」", "", $str);
 
 preg_match_all("/([^、。].*?)、/u", $str, $tou_match_arr);
 

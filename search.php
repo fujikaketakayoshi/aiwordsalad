@@ -33,6 +33,11 @@ if ( $file->is_cache_available($key) ) {
 	$str = str_replace("！", "。", $str);
 	$str = str_replace("■", "。", $str);
 	$str = str_replace("➡︎", "。", $str);
+	$str = str_replace(" ", "。", $str);
+	$str = str_replace("＝", "。", $str);
+	$str = str_replace("「", "", $str);
+	$str = str_replace("」", "", $str);
+	
 	
 	preg_match_all("/([^、。].*?)、/u", $str, $tou_match_arr);
 	
@@ -60,6 +65,38 @@ if ( $file->is_cache_available($key) ) {
 	$ku_array = $arr['ku'];
 }
 
+shuffle($tou_array);
+shuffle($ku_array);
+
+$wordsalads = [];
+
+// 7個のワードサラダブロックを作る
+foreach ( range(1, 7) as $i ) {
+	$line_words = [];
+	
+	// 9句読点を配列に入れて最後は句点を入れる、20%の確率で各文にキーワードを挿入
+	foreach ( range(1, 9) as $ii ) {
+		if ( rand(0, 1) === 0 ) {
+			$tmp = array_shift($tou_array);
+			$tmp = rand(0, 5) === 0 ? $keyword . $tmp : $tmp;
+			$line_words[] = $tmp . "、";
+		} else {
+			$tmp = array_shift($ku_array);
+			$tmp = rand(0, 5) === 0 ? $keyword . $tmp : $tmp;
+			$line_words[] =  $tmp . "。";
+		}
+	}
+	
+	$line_words[] = array_shift($ku_array) . "。";
+	$wordsalads[] = implode("", $line_words);
+	
+	if ( count($ku_array) === 0 ) break;
+}
+
+
+
+var_dump($wordsalads);
+echo "<br>";
 var_dump($tou_array);
 echo "<br>";
 var_dump($ku_array);
