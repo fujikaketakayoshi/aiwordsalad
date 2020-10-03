@@ -1,3 +1,5 @@
+<a href="./search.php">search</a>
+<br>
 <a href="./hb_cache_view.php">HB cache view</a>
 <br>
 <a href="./hatenabookmark_run.php">Hatenabookmark Test Run</a>
@@ -39,10 +41,14 @@ foreach ( $tou_match_arr[1] as $m ) {
 
 $file = new KeyValueFile('phplib/tmp', ['expires' => true]);
 $file->set_expire_span(60*60);
-$file->set_keyvalue('index_tou_array', $tou_array);
+$arr = [];
+$arr['tou'] = $tou_array;
+$arr['ku'] = $ku_array;
+var_dump($arr);
+$file->set_keyvalue('tou_ku_array', $arr);
 
-$file = new KeyValueFile('phplib/tmp', ['expires' => true]);
-$file->set_expire_span(60*60);
-$file->set_keyvalue('index_ku_array', $ku_array);
+//$file = new KeyValueFile('phplib/tmp', ['expires' => true]);
+//$file->set_expire_span(60*60);
+//var_dump($file->set_keyvalue('index_ku_array', $ku_array));
 
 //var_dump($tou_array);

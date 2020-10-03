@@ -5,7 +5,7 @@ use Crawler\HB;
 
 $hb = new HB();
 
-// 不適切記号を句読点化
+// 不適切記号を句読点化または消去
 $str = str_replace("...", "、", $hb->get_desc_str());
 $str = str_replace("、。", "。", $str);
 $str = str_replace("。、", "。", $str);
@@ -13,6 +13,9 @@ $str = str_replace("？", "。", $str);
 $str = str_replace("！", "。", $str);
 $str = str_replace("■", "。", $str);
 $str = str_replace("➡︎", "。", $str);
+$str = str_replace("「", "", $str);
+$str = str_replace("」", "", $str);
+
 
 preg_match_all("/([^、。].*?)、/u", $str, $tou_match_arr);
 

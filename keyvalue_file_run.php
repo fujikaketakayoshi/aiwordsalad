@@ -11,7 +11,7 @@ $file = new KeyValueFile('phplib/tmp');
 $file->set_keyvalue('あいう', array(1,2,3,4));
 
 
-$file->get_keyvalue('あいう');
+var_dump($file->get_keyvalue('あいう'));
 
 
 

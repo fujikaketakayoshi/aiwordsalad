@@ -3,25 +3,19 @@ require('phplib/keyvalue_file.class.php');
 
 use KeyValueFile\KeyValueFile;
 
-$index_tou = [];
-$index_ku = [];
+$tou_array = [];
+$ku_array = [];
 
 $file = new KeyValueFile('phplib/tmp');	
-$key = 'index_tou_array';
+$key = 'tou_ku_array';
 if ( $file->is_cache_available($key) ) {
-	$index_tou = $file->get_keyvalue($key);
+	$arr = $file->get_keyvalue($key);
+	$tou_array = $arr['tou'];
+	$ku_array = $arr['ku'];
 } else {
 	$file->remove_file($key);
 }
 
-$file = new KeyValueFile('phplib/tmp');
-$key = 'index_ku_array';
-if ( $file->is_cache_available($key) ) {
-	$index_ku = $file->get_keyvalue($key);
-} else {
-	$file->remove_file($key);
-}
-
-var_dump($index_tou);
+var_dump($tou_array);
 echo '<br>';
-var_dump($index_ku);
+var_dump($ku_array);

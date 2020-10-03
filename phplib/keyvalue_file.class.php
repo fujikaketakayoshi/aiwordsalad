@@ -105,9 +105,6 @@ class KeyValueFile {
 			'value'   => $value,
 			'expires' => $this->expires ? time() + $this->expire_span : 0,
 		));
-		var_dump($this->expire_span);
-		var_dump($this->expires);
-		var_dump($serialized_data);
 		
 		// 一時データ保存
 		$tmp_file = $this->tmp_path . '/' . $this->key;
