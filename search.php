@@ -8,7 +8,7 @@ use Crawler\HB;
 
 $keyword = isset($_SERVER['PATH_INFO']) ? str_replace("/", "", $_SERVER['PATH_INFO']) : '';
 $url = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
-$index_url = str_replace("search.php", "index.php", $url);
+$index_url = str_replace("search.php", "", $url);
 
 if ( $keyword == '') {
 	header("Location: $index_url");

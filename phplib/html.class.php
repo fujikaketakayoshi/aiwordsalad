@@ -12,7 +12,7 @@ function header ($title, $root_url) {
   <title><?= $title ?></title>
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
   <link rel="stylesheet" href="https://npmcdn.com/flatpickr/dist/themes/material_blue.css">
-  <link rel="stylesheet" href="/css/styles.css">
+  <link rel="stylesheet" href="<?= $root_url ?>/css/styles.css">
 </head>
 <body>
 <header>
