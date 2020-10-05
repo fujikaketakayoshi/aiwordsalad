@@ -10,6 +10,8 @@ $keyword = isset($_SERVER['PATH_INFO']) ? str_replace("/", "", $_SERVER['PATH_IN
 $url = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("search.php", "", $url);
 
+var_dump($_SERVER["REQUEST_SCHEME"] );
+
 if ( $keyword == '') {
 	header("Location: $index_url");
 	exit;

@@ -2,7 +2,7 @@
 namespace Html;
 
 function header ($title, $root_url) {
-var_dump($root_url);
+//var_dump($root_url);
 ?>
 <!DOCTYPE html>
 <html lang="ja">
