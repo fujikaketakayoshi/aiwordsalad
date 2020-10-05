@@ -7,10 +7,12 @@ use KeyValueFile\KeyValueFile;
 use Crawler\HB;
 
 $keyword = isset($_SERVER['PATH_INFO']) ? str_replace("/", "", $_SERVER['PATH_INFO']) : '';
-$url = $_SERVER["REQUEST_SCHEME"] . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+
+$scheme = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
+$url = $scheme . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("search.php", "", $url);
 
-var_dump($_SERVER);
+//var_dump($index_url);
 
 if ( $keyword == '') {
 	header("Location: $index_url");
