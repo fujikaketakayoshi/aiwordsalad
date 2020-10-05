@@ -8,11 +8,9 @@ use Crawler\HB;
 
 $keyword = isset($_SERVER['PATH_INFO']) ? str_replace("/", "", $_SERVER['PATH_INFO']) : '';
 
-$scheme = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
-$url = $scheme . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+$protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
+$url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("search.php", "", $url);
-
-//var_dump($index_url);
 
 if ( $keyword == '') {
 	header("Location: $index_url");
@@ -125,7 +123,10 @@ Html\header($keyword . 'のAI Wordsalad', $index_url);
 ?>
 	<div class="container">
 		<div class="row">
+			<div class="col col-md-offset-2 col-md-8">
+<!--
 			<div class="col col-md-4">
+			-->
 				<nav class="panel panel-default">
 					<div class="panel-heading"><?= $keyword ?>のAIワードサラダ</div>
 <!--
