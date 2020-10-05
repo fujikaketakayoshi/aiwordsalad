@@ -46,7 +46,7 @@ $file->set_expire_span(60*60);
 $arr = [];
 $arr['tou'] = $tou_array;
 $arr['ku'] = $ku_array;
-var_dump($arr);
+//var_dump($arr);
 $file->set_keyvalue('tou_ku_array', $arr);
 
 //$file = new KeyValueFile('phplib/tmp', ['expires' => true]);

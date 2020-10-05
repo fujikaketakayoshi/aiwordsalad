@@ -105,9 +105,9 @@ if ( $file->has_key($keyword) ) {
 		if ( count($ku_array) === 0 ) break;
 	}
 	
-	var_dump($tou_array);
-	echo "<br>";
-	var_dump($ku_array);
+//	var_dump($tou_array);
+//	echo "<br>";
+//	var_dump($ku_array);
 	
 	// ワードサラダを保存
 	$file = new KeyValueFile('phplib/tmp');
@@ -117,7 +117,7 @@ if ( $file->has_key($keyword) ) {
 //echo "<br>";
 //var_dump($wordsalads);
 
-Html\header('AI Wordsalad', $index_url);
+Html\header($keyword . 'のAI Wordsalad', $index_url);
 ?>
 	<div class="container">
 		<div class="row">
