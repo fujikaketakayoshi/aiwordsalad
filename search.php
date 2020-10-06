@@ -51,6 +51,8 @@ if ( $file->has_key($keyword) ) {
 		$str = str_replace("◦", "。", $str);
 		$str = str_replace("■", "。", $str);
 		$str = str_replace("➡︎", "。", $str);
+		$str = str_replace("(", "、", $str);
+		$str = str_replace(")", "。", $str);
 		$str = str_replace("（", "、", $str);
 		$str = str_replace("）", "。", $str);
 		$str = str_replace(" ", "", $str);
@@ -111,18 +113,11 @@ if ( $file->has_key($keyword) ) {
 		
 		if ( count($ku_array) === 0 ) break;
 	}
-	
-//	var_dump($tou_array);
-//	echo "<br>";
-//	var_dump($ku_array);
-	
+		
 	// ワードサラダを保存
 	$file = new KeyValueFile('phplib/tmp');
 	$file->set_keyvalue($keyword, $wordsalads);
 }
-
-//echo "<br>";
-//var_dump($wordsalads);
 
 Html\header($keyword . 'のAI Wordsalad', $index_url);
 ?>
