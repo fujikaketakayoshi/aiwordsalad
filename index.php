@@ -1,56 +1,43 @@
-<a href="./search.php">search</a>
+<!--<a href="./search.php">search</a>
 <br>
 <a href="./hb_cache_view.php">HB cache view</a>
 <br>
 <a href="./hatenabookmark_run.php">Hatenabookmark Test Run</a>
 <br>
 <a href="./keyvalue_file_run.php">KeyValueFile Test Run</a>
-
+-->
 <?php
-require_once('phplib/crawler.class.php');
 require_once('phplib/keyvalue_file.class.php');
+require_once('phplib/html.class.php');
 
-use Crawler\HB;
 use KeyValueFile\KeyValueFile;
 
-$hb = new HB();
+$protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
+$url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+$index_url = str_replace("index.php", "", $url);
 
-// 不適切記号を句読点化
-$str = str_replace("...", "、", $hb->get_desc_str());
-$str = str_replace("、。", "。", $str);
-$str = str_replace("。、", "。", $str);
-$str = str_replace("？", "。", $str);
-$str = str_replace("！", "。", $str);
-$str = str_replace("■", "。", $str);
-$str = str_replace("➡︎", "。", $str);
-$str = str_replace("「", "", $str);
-$str = str_replace("」", "", $str);
+Html\header('AI Wordsalad', $index_url);
+?>
+	<div class="container">
+		<div class="row">
+			<div class="col col-md-offset-1 col-md-10">
+				<nav class="panel panel-default">
+					<div class="panel-heading">AIワードサラダを検索する</div>
+					<div class="panel-body">
+						<form action="<?= $index_url ?>search.php" method="GET">
+							<div class="form-group">
+								<label for="keyword">検索したい言葉</label>
+								<input type="text" class="form-control" name="keyword" id="keyword" value="" />
+							</div>
+							<div class="text-right">
+								<button type="submit" class="btn btn-primary">検索</button>
+							</div>
+						</form>
+					</div>
+				</nav>
+			</div>
+		</div>
+	</div>
 
-preg_match_all("/([^、。].*?)、/u", $str, $tou_match_arr);
-
-$tou_array = [];
-$ku_array = [];
-
-foreach ( $tou_match_arr[1] as $m ) {
-	$arr = explode("。", $m);
-	if ( count($arr) == 1 ) {
-		$tou_array[] = $arr[0];
-	} else {
-		$tmparr = array_slice($arr, 0, count($arr) - 1);
-		$ku_array[] = $tmparr[0];
-	}
-}
-
-$file = new KeyValueFile('phplib/tmp', ['expires' => true]);
-$file->set_expire_span(60*60);
-$arr = [];
-$arr['tou'] = $tou_array;
-$arr['ku'] = $ku_array;
-//var_dump($arr);
-$file->set_keyvalue('tou_ku_array', $arr);
-
-//$file = new KeyValueFile('phplib/tmp', ['expires' => true]);
-//$file->set_expire_span(60*60);
-//var_dump($file->set_keyvalue('index_ku_array', $ku_array));
-
-//var_dump($tou_array);
+<?php
+Html\footer();

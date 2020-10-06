@@ -6,15 +6,20 @@ require_once('phplib/html.class.php');
 use KeyValueFile\KeyValueFile;
 use Crawler\HB;
 
-$keyword = isset($_SERVER['PATH_INFO']) ? str_replace("/", "", $_SERVER['PATH_INFO']) : '';
 
 $protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
 $url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("search.php", "", $url);
 
-if ( $keyword == '') {
+$keyword = isset($_SERVER['PATH_INFO']) ? str_replace("/", "", $_SERVER['PATH_INFO']) : '';
+
+// まず、indexのフォームからの入力を自身のPATH_INFO変数に渡す
+if ( isset($_GET['keyword']) ) {
+	$search_url = $url . '/' . $_GET['keyword'];
+	header("Location: $search_url");
+// $keywordが作られていない場合は、indexに戻る
+} elseif ( $keyword == '' ) {
 	header("Location: $index_url");
-	exit;
 }
 
 $wordsalads = [];
@@ -124,9 +129,6 @@ Html\header($keyword . 'のAI Wordsalad', $index_url);
 	<div class="container">
 		<div class="row">
 			<div class="col col-md-offset-1 col-md-10">
-<!--
-			<div class="col col-md-4">
-			-->
 				<nav class="panel panel-default">
 					<div class="panel-heading"><?= $keyword ?>のAIワードサラダ</div>
 <!--
