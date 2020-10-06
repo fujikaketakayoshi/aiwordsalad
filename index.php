@@ -16,6 +16,10 @@ $protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARD
 $url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("index.php", "", $url);
 
+$recent_keywords = ['バナナ', 'リンゴ', 'ゴリラ', 'ラッパ', 'パンツ'];
+
+$archives = ['2020/10/06'];
+
 Html\header('AI Wordsalad', $index_url);
 ?>
 	<div class="container">
@@ -37,6 +41,37 @@ Html\header('AI Wordsalad', $index_url);
 				</nav>
 			</div>
 		</div>
+		<div class="row">
+			<div class="col col-md-offset-1 col-md-10">
+				<nav class="panel panel-default">
+					<div class="panel-heading">直近の検索履歴</div>
+<!--					<div class="panel-body">
+					</div>-->
+					<div class="list-group">
+						<?php foreach( $recent_keywords as $word ) { ?>
+							<a href="<?= $index_url?>search.php/<?= $word ?>" class="list-group-item">
+								<?= htmlspecialchars($word) ?>
+							</a>
+						<?php } ?>
+					</div>
+				</nav>
+			</div>
+			<div class="col col-md-offset-1 col-md-10">
+				<nav class="panel panel-default">
+					<div class="panel-heading">直近の検索履歴</div>
+<!--					<div class="panel-body">
+					</div>-->
+					<div class="list-group">
+						<?php foreach( $archives as $a ) { ?>
+							<a href="<?= $index_url?>archive.php" class="list-group-item">
+								<?= htmlspecialchars($a) ?>
+							</a>
+						<?php } ?>
+					</div>
+				</nav>
+			</div>
+		</div>
+
 	</div>
 
 <?php

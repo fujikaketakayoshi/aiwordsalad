@@ -125,7 +125,7 @@ Html\header($keyword . 'のAI Wordsalad', $index_url);
 		<div class="row">
 			<div class="col col-md-offset-1 col-md-10">
 				<nav class="panel panel-default">
-					<div class="panel-heading"><?= $keyword ?>のAIワードサラダ</div>
+					<div class="panel-heading"><?= htmlspecialchars($keyword) ?>のAIワードサラダ</div>
 <!--
 					<div class="panel-body">
 						<a href="{{ route('folders.create') }}" class="btn btn-default btn-block">
