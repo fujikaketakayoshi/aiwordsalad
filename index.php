@@ -16,7 +16,13 @@ $protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARD
 $url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("index.php", "", $url);
 
-$recent_keywords = ['バナナ', 'リンゴ', 'ゴリラ', 'ラッパ', 'パンツ'];
+$file = new KeyValueFile('phplib/tmp');
+$recent_key = 'recent_keywords';
+$recent_keywords = [];
+if ( $file->has_key($recent_key) ) {
+	$recent_keywords = $file->get_keyvalue($recent_key);
+}
+
 
 $archives = ['2020/10/06'];
 

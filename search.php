@@ -116,8 +116,32 @@ if ( $file->has_key($keyword) ) {
 		
 	// ワードサラダを保存
 	$file = new KeyValueFile('phplib/tmp');
-	$file->set_keyvalue($keyword, $wordsalads);
+	$file->set_keyvalue($keyword, $wordsalads);	
 }
+
+// 検索履歴
+$file = new KeyValueFile('phplib/tmp');
+$recent_key = 'recent_keywords';
+$recent_keywords = [];
+if ( $file->has_key($recent_key) ) {
+	$recent_keywords = $file->get_keyvalue($recent_key);
+}
+//$recent_keywords[] = $keyword;
+array_unshift($recent_keywords, $keyword);
+$recent_keywords = array_unique($recent_keywords);
+$tmp = [];
+foreach ( $recent_keywords as $rw ) {
+	if ( $rw !== "" ) $tmp[] = $rw;
+}
+$recent_keywords = $tmp;
+// 検索履歴の表示数8
+$recent_keywords_max = 8;
+if ( count($recent_keywords) > $recent_keywords_max ) {
+	$recent_keywords = array_slice($recent_keywords, 0, $recent_keywords_max);
+}
+$file->set_keyvalue($recent_key, $recent_keywords);
+
+
 
 Html\header($keyword . 'のAI Wordsalad', $index_url);
 ?>
