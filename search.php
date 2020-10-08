@@ -119,14 +119,13 @@ if ( $file->has_key($keyword) ) {
 	$file->set_keyvalue($keyword, $wordsalads);	
 }
 
-// 検索履歴
+// 直近の検索履歴
 $file = new KeyValueFile('phplib/tmp');
 $recent_key = 'recent_keywords';
 $recent_keywords = [];
 if ( $file->has_key($recent_key) ) {
 	$recent_keywords = $file->get_keyvalue($recent_key);
 }
-//$recent_keywords[] = $keyword;
 array_unshift($recent_keywords, $keyword);
 $recent_keywords = array_unique($recent_keywords);
 $tmp = [];
@@ -141,7 +140,17 @@ if ( count($recent_keywords) > $recent_keywords_max ) {
 }
 $file->set_keyvalue($recent_key, $recent_keywords);
 
-
+// 日付の検索履歴
+$file = new KeyValueFile('phplib/tmp');
+$date_key = date("Y年m月d日");
+$date_keywords = [];
+if ( $file->has_key($date_key) ) {
+	$date_keywords = $file->get_keyvalue($date_key);
+}
+array_unshift($date_keywords, $keyword);
+$date_keywords = array_unique($date_keywords);
+$file->set_keyvalue($date_key, $date_keywords);
+var_dump($date_key);
 
 Html\header($keyword . 'のAI Wordsalad', $index_url);
 ?>

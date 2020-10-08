@@ -23,8 +23,15 @@ if ( $file->has_key($recent_key) ) {
 	$recent_keywords = $file->get_keyvalue($recent_key);
 }
 
-
-$archives = ['2020/10/06'];
+$file = new KeyValueFile('phplib/tmp');
+// 過去１週間のdate_keyがあるか確認して日付を取得
+$dates = [];
+foreach ( range(0, 6) as $day ) {
+	$date_key = date("Y年m月d日", time() - 24*60*60*$day);
+	if ( $file->has_key($date_key) ) {
+		$dates[] = $date_key;
+	}
+}
 
 Html\header('AI Wordsalad', $index_url);
 ?>
@@ -50,7 +57,7 @@ Html\header('AI Wordsalad', $index_url);
 		<div class="row">
 			<div class="col col-md-offset-1 col-md-10">
 				<nav class="panel panel-default">
-					<div class="panel-heading">直近の検索履歴</div>
+					<div class="panel-heading">最新の検索履歴</div>
 <!--					<div class="panel-body">
 					</div>-->
 					<div class="list-group">
@@ -64,13 +71,13 @@ Html\header('AI Wordsalad', $index_url);
 			</div>
 			<div class="col col-md-offset-1 col-md-10">
 				<nav class="panel panel-default">
-					<div class="panel-heading">直近の検索履歴</div>
+					<div class="panel-heading">最近の検索履歴</div>
 <!--					<div class="panel-body">
 					</div>-->
 					<div class="list-group">
-						<?php foreach( $archives as $a ) { ?>
+						<?php foreach( $dates as $d ) { ?>
 							<a href="<?= $index_url?>archive.php" class="list-group-item">
-								<?= htmlspecialchars($a) ?>
+								<?= htmlspecialchars($d) ?>
 							</a>
 						<?php } ?>
 					</div>
