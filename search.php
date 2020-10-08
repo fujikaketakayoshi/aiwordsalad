@@ -150,7 +150,6 @@ if ( $file->has_key($date_key) ) {
 array_unshift($date_keywords, $keyword);
 $date_keywords = array_unique($date_keywords);
 $file->set_keyvalue($date_key, $date_keywords);
-var_dump($date_key);
 
 Html\header($keyword . 'のAI Wordsalad', $index_url);
 ?>
