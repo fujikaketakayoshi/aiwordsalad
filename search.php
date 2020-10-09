@@ -168,7 +168,7 @@ Html\header($keyword . 'のAI Wordsalad', $index_url);
 					<div class="list-group">
 					<?php foreach ($wordsalads as $ws) { ?>
 						<div class="list-group-item">
-								<?= $ws ?>
+								<?= htmlspecialchars($ws) ?>
 						</div>
 					<?php } ?>
 					</div>

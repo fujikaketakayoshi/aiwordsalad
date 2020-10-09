@@ -1,11 +1,3 @@
-<!--<a href="./search.php">search</a>
-<br>
-<a href="./hb_cache_view.php">HB cache view</a>
-<br>
-<a href="./hatenabookmark_run.php">Hatenabookmark Test Run</a>
-<br>
-<a href="./keyvalue_file_run.php">KeyValueFile Test Run</a>
--->
 <?php
 require_once('phplib/keyvalue_file.class.php');
 require_once('phplib/html.class.php');
@@ -62,7 +54,7 @@ Html\header('AI Wordsalad', $index_url);
 					</div>-->
 					<div class="list-group">
 						<?php foreach( $recent_keywords as $word ) { ?>
-							<a href="<?= $index_url?>search.php/<?= $word ?>" class="list-group-item">
+							<a href="<?= $index_url?>search.php/<?= htmlspecialchars($word) ?>" class="list-group-item">
 								<?= htmlspecialchars($word) ?>
 							</a>
 						<?php } ?>
@@ -76,7 +68,7 @@ Html\header('AI Wordsalad', $index_url);
 					</div>-->
 					<div class="list-group">
 						<?php foreach( $dates as $d ) { ?>
-							<a href="<?= $index_url?>archive.php" class="list-group-item">
+							<a href="<?= $index_url?>archive.php?date=<?= htmlspecialchars($d) ?>" class="list-group-item">
 								<?= htmlspecialchars($d) ?>
 							</a>
 						<?php } ?>
