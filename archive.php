@@ -18,7 +18,6 @@ if ( $file->has_key($archive_key) ) {
 	$archives = $file->get_keyvalue($archive_key);
 }
 
-
 Html\header('AI Wordsalad', $index_url);
 ?>
 	<div class="container">
