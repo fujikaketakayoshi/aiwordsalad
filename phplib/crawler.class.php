@@ -19,3 +19,15 @@ class HB {
 	}
 }
 
+class TT {
+	var $desc_src = '';
+	
+	function __construct() {
+		$html = file_get_contents('https://tsuiran.jp/trend/hourly');
+		$this->desc_str = $html;
+	}
+
+	function get_desc_str() {
+		return $this->desc_str;
+	}
+}
