@@ -4,7 +4,7 @@ require_once('phplib/html.class.php');
 
 use KeyValueFile\KeyValueFile;
 
-$protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
+$protocol = $_SERVER["REQUEST_SCHEME"] ?? 'http';
 $url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("archive.php", "", $url);
 
