@@ -5,6 +5,8 @@ require_once('phplib/html.class.php');
 use KeyValueFile\KeyValueFile;
 
 
+var_dump($_SERVER);
+
 $protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
 $url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
 $index_url = str_replace("index.php", "", $url);
