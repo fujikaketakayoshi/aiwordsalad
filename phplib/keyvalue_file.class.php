@@ -13,6 +13,8 @@ class KeyValueFile {
 	var $key = '';
 	var $key_path = './';
 	var $hashing = true;
+	var $path_key_path;
+	var $key_fullpath;
 //	var $is_hashed = false;
 //	var $mkdir_permission = 777;
 //	var $tmp_path = '/var/tmp/';
