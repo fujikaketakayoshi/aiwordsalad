@@ -9,13 +9,13 @@ function header ($title, $root_url) {
 <head>
 
 <!-- Google tag (gtag.js) -->
-<script async src="https://www.googletagmanager.com/gtag/js?id=G-XJQ59FHTYX"></script>
+<script async src="https://www.googletagmanager.com/gtag/js?id=G-VZK94PZDPW"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
   function gtag(){dataLayer.push(arguments);}
   gtag('js', new Date());
 
-  gtag('config', 'G-XJQ59FHTYX');
+  gtag('config', 'G-VZK94PZDPW');
 </script>
 
   <meta charset="UTF-8">
