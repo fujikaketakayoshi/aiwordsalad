@@ -1,6 +1,7 @@
 <?php
 require_once('phplib/keyvalue_file.class.php');
 require_once('phplib/html.class.php');
+ini_set('date.timezone', 'Asia/Tokyo');
 
 use KeyValueFile\KeyValueFile;
 

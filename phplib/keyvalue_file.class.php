@@ -170,7 +170,7 @@ class KeyValueFile {
 //		$lock_dir = $this->path_key_path . '.lock';
 //		if ( ! file_exists($lock_dir) ) {
 //		}
-		
+
 		if ( $this->path_key_path !== null && !file_exists($this->path_key_path) ) {
 			// パーミッションはconstructorのumaskで調節する
 			mkdir($this->path_key_path, 0777, true);

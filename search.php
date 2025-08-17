@@ -2,6 +2,7 @@
 require_once('phplib/keyvalue_file.class.php');
 require_once('phplib/crawler.class.php');
 require_once('phplib/html.class.php');
+ini_set('date.timezone', 'Asia/Tokyo');
 
 use KeyValueFile\KeyValueFile;
 use Crawler\HB;
@@ -22,14 +23,16 @@ $path_info = $_SERVER['PATH_INFO'];
 $keyword = $path_info ? str_replace("/", "", $path_info) : '';
 
 // まず、indexのフォームからの入力を自身のPATH_INFO変数に渡す
-/** @var string $keyword */
-$keyword = $_GET['keyword'];
-if ($keyword) {
+if (isset($_GET['keyword']) && !$keyword) {
+	/** @var string $keyword */
+	$keyword = $_GET['keyword'];
 	$search_url = $url . '/' . $keyword;
 	header("Location: $search_url");
+	exit();
 // $keywordが作られていない場合は、indexに戻る
 } elseif ( $keyword == '' ) {
 	header("Location: $index_url");
+	exit();
 }
 
 $wordsalads = [];
@@ -137,14 +140,14 @@ $file = new KeyValueFile('phplib/tmp');
 $recent_key = 'recent_keywords';
 $recent_keywords = [];
 if ( $file->has_key($recent_key) ) {
-    /** @var array<string> $recent_keywords */
+    /** @var array<string|null> $recent_keywords */
 	$recent_keywords = $file->get_keyvalue($recent_key);
 }
 array_unshift($recent_keywords, $keyword);
 $recent_keywords = array_unique($recent_keywords);
 $tmp = [];
 foreach ( $recent_keywords as $rw ) {
-	if ( $rw !== "" ) $tmp[] = $rw;
+	if ( $rw !== null) $tmp[] = $rw;
 }
 $recent_keywords = $tmp;
 // 検索履歴の表示数8
@@ -159,11 +162,16 @@ $file = new KeyValueFile('phplib/tmp');
 $date_key = date("Y年m月d日");
 $date_keywords = [];
 if ( $file->has_key($date_key) ) {
-	/** @var array<string> $date_keywords */
+	/** @var array<string|null> $date_keywords */
 	$date_keywords = $file->get_keyvalue($date_key);
 }
 array_unshift($date_keywords, $keyword);
 $date_keywords = array_unique($date_keywords);
+$tmp = [];
+foreach ( $date_keywords as $rw ) {
+	if ( $rw !== null) $tmp[] = $rw;
+}
+$date_keywords = $tmp;
 $file->set_keyvalue($date_key, $date_keywords);
 
 Html\header($keyword . 'のAI Wordsalad', $index_url);
