@@ -1,8 +1,12 @@
 <?php
 namespace Html;
 
-function header ($title, $root_url) {
-//var_dump($root_url);
+/**
+ * @param string $title
+ * @param string $root_url
+ * @return void
+ */
+function header (string $title, string $root_url) {
 ?>
 <!DOCTYPE html>
 <html lang="ja">
@@ -36,6 +40,9 @@ function header ($title, $root_url) {
 <?php
 }
 
+/**
+ * @return void
+ */
 function footer () {
 ?>
 </main>

@@ -2,32 +2,44 @@
 namespace Crawler;
 
 class HB {
-		
-	var $desc_str = '';
+	
+	/**
+     * @var string
+     */
+	public $desc_str = '';
 	
 	function __construct() {
-		$rss = simplexml_load_string(file_get_contents("https://b.hatena.ne.jp/hotentry.rss"));
-		$json = json_encode($rss);
+		$rss = simplexml_load_string((string) file_get_contents("https://b.hatena.ne.jp/hotentry.rss"));
+		$json = (string) json_encode($rss);
 		$arr = json_decode($json, true);
 		foreach ($arr['item'] as $item) {
 			$this->desc_str .= $item['description'];
 		}
 	}
 	
-	function get_desc_str() {
+	/**
+	* @return string
+	*/
+	function get_desc_str(): string {
 		return $this->desc_str;
 	}
 }
 
 class TT {
-	var $desc_src = '';
+	/**
+     * @var string
+     */
+	public $desc_src = '';
 	
 	function __construct() {
-		$html = file_get_contents('https://tsuiran.jp/trend/hourly');
+		$html = (string) file_get_contents('https://tsuiran.jp/trend/hourly');
 		$this->desc_src = $html;
 	}
-
-	function get_desc_str() {
+	
+	/**
+	* @return string
+	*/
+	function get_desc_str(): string {
 		return $this->desc_src;
 	}
 }
