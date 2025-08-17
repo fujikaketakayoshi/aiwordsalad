@@ -7,15 +7,25 @@ use KeyValueFile\KeyValueFile;
 use Crawler\HB;
 
 
+/** @var string $protocol */
 $protocol = $_SERVER["REQUEST_SCHEME"] ?? 'http';
-$url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+/** @var string $http_host */
+$http_host = $_SERVER['HTTP_HOST'];
+/** @var string $script_name */
+$script_name = $_SERVER['SCRIPT_NAME'];
+$url = $protocol . "://" . $http_host . $script_name;
 $index_url = str_replace("search.php", "", $url);
 
-$keyword = isset($_SERVER['PATH_INFO']) ? str_replace("/", "", $_SERVER['PATH_INFO']) : '';
+/** @var string $path_info */
+$path_info = $_SERVER['PATH_INFO'];
+
+$keyword = $path_info ? str_replace("/", "", $path_info) : '';
 
 // まず、indexのフォームからの入力を自身のPATH_INFO変数に渡す
-if ( isset($_GET['keyword']) ) {
-	$search_url = $url . '/' . $_GET['keyword'];
+/** @var string $keyword */
+$keyword = $_GET['keyword'];
+if ($keyword) {
+	$search_url = $url . '/' . $keyword;
 	header("Location: $search_url");
 // $keywordが作られていない場合は、indexに戻る
 } elseif ( $keyword == '' ) {
@@ -27,6 +37,7 @@ $file = new KeyValueFile('phplib/tmp');
 
 // ワードサラダが保存されていれば取り出し、無ければ作成
 if ( $file->has_key($keyword) ) {
+	/** @var array<string> $wordsalads */
 	$wordsalads = $file->get_keyvalue($keyword);
 } else {
 	$tou_array = [];
@@ -35,6 +46,7 @@ if ( $file->has_key($keyword) ) {
 	$file = new KeyValueFile('phplib/tmp', ['expires' => true]);
 	$key = 'tou_ku_array';
 	if ( $file->is_cache_available($key) ) {
+		/** @var array{tou: array<string>, ku: array<string>} $arr */
 		$arr = $file->get_keyvalue($key);
 		$tou_array = $arr['tou'];
 		$ku_array = $arr['ku'];
@@ -83,6 +95,7 @@ if ( $file->has_key($keyword) ) {
 		$arr['tou'] = $tou_array;
 		$arr['ku'] = $ku_array;
 		$file->set_keyvalue('tou_ku_array', $arr);
+		/** @var array{tou: array<string>, ku: array<string>} $arr */
 		$arr = $file->get_keyvalue($key);
 		$tou_array = $arr['tou'];
 		$ku_array = $arr['ku'];
@@ -124,6 +137,7 @@ $file = new KeyValueFile('phplib/tmp');
 $recent_key = 'recent_keywords';
 $recent_keywords = [];
 if ( $file->has_key($recent_key) ) {
+    /** @var array<string> $recent_keywords */
 	$recent_keywords = $file->get_keyvalue($recent_key);
 }
 array_unshift($recent_keywords, $keyword);
@@ -145,6 +159,7 @@ $file = new KeyValueFile('phplib/tmp');
 $date_key = date("Y年m月d日");
 $date_keywords = [];
 if ( $file->has_key($date_key) ) {
+	/** @var array<string> $date_keywords */
 	$date_keywords = $file->get_keyvalue($date_key);
 }
 array_unshift($date_keywords, $keyword);

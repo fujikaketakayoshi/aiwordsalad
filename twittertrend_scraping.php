@@ -3,8 +3,13 @@ require_once('phplib/crawler.class.php');
 
 use Crawler\TT;
 
+/** @var string $protocol */
 $protocol = isset($_SERVER["HTTP_X_FORWARDED_PROTO"]) ? $_SERVER["HTTP_X_FORWARDED_PROTO"] : 'http';
-$url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+/** @var string $http_host */
+$http_host = $_SERVER['HTTP_HOST'];
+/** @var string $script_name */
+$script_name = $_SERVER['SCRIPT_NAME'];
+$url = $protocol . "://" . $http_host . $script_name;
 $index_url = str_replace("twittertrend_scraping.php", "", $url);
 
 $tt = new TT();

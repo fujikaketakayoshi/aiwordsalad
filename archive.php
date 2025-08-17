@@ -4,17 +4,24 @@ require_once('phplib/html.class.php');
 
 use KeyValueFile\KeyValueFile;
 
+/** @var string $protocol */
 $protocol = $_SERVER["REQUEST_SCHEME"] ?? 'http';
-$url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+/** @var string $http_host */
+$http_host = $_SERVER['HTTP_HOST'];
+/** @var string $script_name */
+$script_name = $_SERVER['SCRIPT_NAME'];
+$url = $protocol . "://" . $http_host . $script_name;
 $index_url = str_replace("archive.php", "", $url);
 
 if ( !isset($_GET['date'])) header("Location: " . $index_url);
+/** @var string $date */
 $date = $_GET['date'];
 
 $file = new KeyValueFile('phplib/tmp');
 $archive_key = $date;
 $archives = [];
 if ( $file->has_key($archive_key) ) {
+	/** @var array<string> $archives */
 	$archives = $file->get_keyvalue($archive_key);
 }
 

@@ -11,6 +11,7 @@ class HB {
 	function __construct() {
 		$rss = simplexml_load_string((string) file_get_contents("https://b.hatena.ne.jp/hotentry.rss"));
 		$json = (string) json_encode($rss);
+		/** @var array{item: array<int, array{description: string}>} $arr */
 		$arr = json_decode($json, true);
 		foreach ($arr['item'] as $item) {
 			$this->desc_str .= $item['description'];
@@ -35,7 +36,7 @@ class TT {
 		$html = (string) file_get_contents('https://tsuiran.jp/trend/hourly');
 		$this->desc_src = $html;
 	}
-	
+
 	/**
 	* @return string
 	*/

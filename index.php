@@ -4,15 +4,20 @@ require_once('phplib/html.class.php');
 
 use KeyValueFile\KeyValueFile;
 
-
+/** @var string $protocol */
 $protocol = $_SERVER["REQUEST_SCHEME"] ?? 'http';
-$url = $protocol . "://" . $_SERVER["HTTP_HOST"] . $_SERVER["SCRIPT_NAME"];
+/** @var string $http_host */
+$http_host = $_SERVER['HTTP_HOST'];
+/** @var string $script_name */
+$script_name = $_SERVER['SCRIPT_NAME'];
+$url = $protocol . "://" . $http_host . $script_name;
 $index_url = str_replace("index.php", "", $url);
 
 $file = new KeyValueFile('phplib/tmp');
 $recent_key = 'recent_keywords';
 $recent_keywords = [];
 if ( $file->has_key($recent_key) ) {
+	/** @var array<string> $recent_keywords */
 	$recent_keywords = $file->get_keyvalue($recent_key);
 }
 
@@ -54,7 +59,9 @@ Html\header('AI Wordsalad', $index_url);
 <!--					<div class="panel-body">
 					</div>-->
 					<div class="list-group">
-						<?php foreach( $recent_keywords as $word ) { ?>
+						<?php
+						/** @var string $word */
+						foreach( $recent_keywords as $word ) { ?>
 							<a href="<?= $index_url?>search.php/<?= htmlspecialchars($word) ?>" class="list-group-item">
 								<?= htmlspecialchars($word) ?>
 							</a>

@@ -211,6 +211,7 @@ class KeyValueFile {
 	function get_keyvalue($key) {
 //		$this->set_is_hashed(true);
 		if ( $this->has_key($key) ) {
+			/** @var array<string, mixed> $tmp */
 			$tmp = $this->get_raw_cache();
 			return $tmp['value'];
 		}
@@ -226,11 +227,17 @@ class KeyValueFile {
 	function is_cache_available($key) {
 		$cache = [];
 		if ( $this->has_key($key) ) {
+			/** @var array<string, mixed> $cache */
 			$cache = $this->get_raw_cache();
 		} else {
 			return false;
 		}
-		return time() > $cache['expires'] ? false : true;
+		if (isset($cache['expires']) && is_numeric($cache['expires'])) {
+			return time() > $cache['expires'] ? false : true;
+		} else {
+			return false;
+		}
+		
 	}
 	
 	/**

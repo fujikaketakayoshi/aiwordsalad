@@ -14,7 +14,7 @@ parameters:
     # PHPStanの解析レベルを設定
     # 最初はレベル1から始めて、徐々に上げていくのがおすすめです。
     # ここではバランスの良いレベル5を設定しています。
-    level: 8
+    level: 9
 
     # PHPStanが無視するエラーの正規表現を指定
     ignoreErrors:
