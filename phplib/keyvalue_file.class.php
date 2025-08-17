@@ -15,7 +15,7 @@ class KeyValueFile {
 	var $hashing = true;
 	var $path_key_path;
 	var $key_fullpath;
-//	var $is_hashed = false;
+	var $is_hashed = false;
 //	var $mkdir_permission = 777;
 //	var $tmp_path = '/var/tmp/';
 	
@@ -73,8 +73,8 @@ class KeyValueFile {
 	
 	function conv_key_path($key) {
 		$key = $this->hashing ? sha1($key . $this->salt) : $key;
+		$key_path = '';
 		if ( $this->path_depth > 0 ) {
-			$key_path = '';
 			foreach ( range(0, $this->path_depth - 1 )as $i ) {
 				$key_path .= substr($key, $i * 2, 2) . '/';
 			}

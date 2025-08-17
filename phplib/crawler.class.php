@@ -6,7 +6,7 @@ class HB {
 	var $desc_str = '';
 	
 	function __construct() {
-		$rss = simplexml_load_string(file_get_contents("http://b.hatena.ne.jp/hotentry.rss"));
+		$rss = simplexml_load_string(file_get_contents("https://b.hatena.ne.jp/hotentry.rss"));
 		$json = json_encode($rss);
 		$arr = json_decode($json, true);
 		foreach ($arr['item'] as $item) {
@@ -24,10 +24,10 @@ class TT {
 	
 	function __construct() {
 		$html = file_get_contents('https://tsuiran.jp/trend/hourly');
-		$this->desc_str = $html;
+		$this->desc_src = $html;
 	}
 
 	function get_desc_str() {
-		return $this->desc_str;
+		return $this->desc_src;
 	}
 }
