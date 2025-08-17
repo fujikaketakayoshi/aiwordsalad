@@ -17,7 +17,7 @@ class KeyValueFile {
 	var $key_fullpath;
 	var $is_hashed = false;
 //	var $mkdir_permission = 777;
-//	var $tmp_path = '/var/tmp/';
+///	var $tmp_path = '/var/tmp/';
 	
 	
 	function __construct( $path, $option = null ) {
