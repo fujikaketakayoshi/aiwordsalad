@@ -1,5 +1,8 @@
 <?php
 
-$arr = get_defined_functions();
+$funcs = get_defined_functions();
 
-var_dump($arr['internal']);
+$arr = $funcs['internal'];
+sort($arr);
+
+var_dump($arr);
