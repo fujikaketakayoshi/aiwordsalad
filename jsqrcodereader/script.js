@@ -3,7 +3,7 @@ const video = document.getElementById('video');
 let contentWidth;
 let contentHeight;
 
-const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width:640, height:480} })
+const media = navigator.mediaDevices.getUserMedia({ audio: false, video: {width:640, height:480, facingMode: "environment"} })
    .then((stream) => {
       video.srcObject = stream;
       video.onloadeddata = () => {
